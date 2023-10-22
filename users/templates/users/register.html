@@ -1,0 +1,83 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Join Today</legend>
+            <div class="form-group mt-4 d-flex flex-column{% if form.username.errors %} has-error{% endif %}">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                {{ form.username }}
+                <small class="text-muted">
+                   Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only
+                </small>
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {{ form.username.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group mt-4 d-flex flex-column{% if form.email.errors %} has-error{% endif %}">
+                <label for="{{ form.email.id_for_label }}">Email*</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <div class="error-message">
+                        {{ form.email.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group mt-4 d-flex flex-column{% if form.password1.errors %} has-error{% endif %}">
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+                {{ form.password1 }}
+                <ul>
+                    <li>
+                        <small class="text-muted">
+                            Your password can't be too similar to your other personal information
+                        </small>
+                    </li>
+                    <li>
+                        <small class="text-muted">
+                            Your password must contain at least 8 characters
+                        </small>
+                    </li>
+                    <li>
+                        <small class="text-muted">
+                            Your password cannot be a commonly used password
+                        </small>
+                    </li>
+                    <li>
+                        <small class="text-muted">
+                            Your password cannot be entirely numeric.
+                        </small>
+                    </li>
+                </ul>
+                {% if form.password1.errors %}
+                    <div class="error-message">
+                        {{ form.password1.errors }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group mt-4 d-flex flex-column{% if form.password2.errors %} has-error{% endif %}">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                {{ form.password2 }}
+                <small class="text-muted">
+                   Enter the same password as before, for verification
+                </small>
+                {% if form.password2.errors %}
+                    <div class="error-message">
+                        {{ form.password2.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group mt-4 mb-4">
+            <button class="btn btn-outline-info" type="submit">Sign Up</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already Have An Account <a class="ml-2" href="{%  url 'login' %}">Sign In</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}

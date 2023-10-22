@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Log In</legend>
+            <div class="form-group mt-4 d-flex flex-column{% if form.username.errors %} has-error{% endif %}">
+                <label for="{{ form.username.id_for_label }}">Username*</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group mt-4 d-flex flex-column{% if form.password.errors %} has-error{% endif %}">
+                <label for="{{ form.password.id_for_label }}">Password*</label>
+                {{ form.password }}
+            </div>
+        </fieldset>
+        <div class="form-group mt-4 mb-4">
+            <button class="btn btn-outline-info" type="submit">Log In</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Don't Have An Account? <a class="ml-2" href="{% url 'register' %}">Register</a>
+        </small>
+    </div>
+</div>
+{% endblock content %}
